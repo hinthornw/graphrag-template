@@ -1,0 +1,16 @@
+{
+    "dockerfile_lines": [],
+    "graphs": {
+        "chatbot": "./src/chatbot/graph.py:graph",
+        "memory_graph": "./src/graphrag/graph.py:graph"
+    },
+    "env": ".env",
+    "python_version": "3.11",
+    "dependencies": ["."],
+    "store": {
+        "index": {
+            "dims": 1536,
+            "embed": "openai:text-embedding-3-small"
+        }
+    }
+}
