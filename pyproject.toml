@@ -1,0 +1,69 @@
+[project]
+name = "hippo-rag-graph"
+version = "0.0.1"
+description = "fA long-term memory processor and example chatbot it works with."
+authors = [
+    { name = "William Fu-Hinthorn", email = "13333726+hinthornw@users.noreply.github.com" },
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = [
+    "langgraph>=0.2.56,<0.3.0",
+    "langgraph-checkpoint>=2.0.8",
+    # Optional (for selecting different models)
+    "langchain-openai>=0.2.1",
+    "langchain-anthropic>=0.2.1",
+    "langchain>=0.3.8",
+    "python-dotenv>=1.0.1",
+    "langgraph-sdk>=0.1.40",
+    "trustcall>=0.0.21",
+]
+
+[project.optional-dependencies]
+dev = ["mypy>=1.11.1", "ruff>=0.6.1", "pytest-asyncio"]
+
+[build-system]
+requires = ["setuptools>=73.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["chatbot", "graphrag"]
+[tool.setuptools.package-dir]
+"chatbot" = "src/chatbot"
+"langgraph.templates.chatbot" = "src/chatbot"
+"graphrag" = "src/graphrag"
+"langgraph.templates.graphrag" = "src/graphrag"
+
+
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+lint.select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "D",    # pydocstyle
+    "D401", # First line should be in imperative mood
+    "T201",
+    "UP",
+]
+lint.ignore = ["UP006", "UP007", "UP035", "D417", "E501"]
+include = ["*.py", "*.pyi", "*.ipynb"]
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "UP"]
+"ntbk/*" = ["D", "UP", "T201"]
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+ignore_errors = true
+
+[dependency-groups]
+dev = [
+    "debugpy>=1.8.9",
+    "langgraph-cli[inmem]>=0.1.61",
+]
+
